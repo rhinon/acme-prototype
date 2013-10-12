@@ -1,2 +1,1 @@
-Acme.ApplicationController = Ember.Controller.extend
-  patients: []
+Acme.ApplicationController = Ember.Controller.extend()
