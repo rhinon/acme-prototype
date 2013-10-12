@@ -18,5 +18,27 @@
   </div>
 </div>
 <div class="container">
-  <h1>acme</h1>
+  <h2>Patient List</h2>
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Bed Number</th>
+      <th>Patient Name</th>
+      <th>Blood Pressure</th>
+      <th>Heart Rate</th>
+      <th>Respitory Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each patients}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
 </div>
