@@ -1,4 +1,6 @@
 Acme::Application.routes.draw do
+  resources :vitals
+
   resources :patients
 
   # The priority is based upon order of creation: first created -> highest priority.

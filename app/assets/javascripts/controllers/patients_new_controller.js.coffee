@@ -7,7 +7,7 @@ Acme.PatientsNewController = Ember.ObjectController.extend(
       @get('store').commit()
 
     cancel: ->
-      #@get('content').deleteRecord()
+      @get('content').deleteRecord()
       @get('store').transaction().rollback()
       @transitionToRoute('patients')
   
