@@ -23,6 +23,6 @@ class PatientsController < ApplicationController
 
   private
   def post_params
-    params.require(:patient).permit(:id, :first_name, :last_name, :bed_number) # only allow these for now
+    params.require(:patient).permit(:first_name, :last_name, :bed_number)
   end
 end

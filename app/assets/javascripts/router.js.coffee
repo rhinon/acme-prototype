@@ -14,6 +14,6 @@ Acme.Router.map ->
 Acme.PatientsIndexRoute = Ember.Route.extend
   model: -> Acme.Patient.find()
 
-# Acme.PatientsNewRoute = Ember.Route.extend
-#   model: -> Acme.Patient.createRecord()
+Acme.PatientsNewRoute = Ember.Route.extend
+  model: -> Acme.Patient.createRecord()
 

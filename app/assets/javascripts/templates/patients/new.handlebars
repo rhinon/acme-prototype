@@ -3,18 +3,24 @@
   <div class="control-group">
     <label class="control-label" for="firstName">First Name</label>
     <div class="controls">
-      {{view Ember.TextField valueBinding="firstName" id="firstName" placeholder="First Name" required="true"}}
+      {{input valueBinding="firstName" id="firstName" placeholder="First Name" required="true"}}
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="lastName">Last Name</label>
     <div class="controls">
-      {{view Ember.TextField valueBinding="lastName" id="lastName" placeholder="Last Name" required="true"}}
+      {{input valueBinding="lastName" id="lastName" placeholder="Last Name" required="true"}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="bedNumber">Bed Number</label>
+    <div class="controls">
+      {{input valueBinding="bedNumber" id="bedNumber" required="false"}}
     </div>
   </div>
 
   <div class="form-actions">
-    {{submitButton "Update"}}
+    <button class="btn btn-primary" type="submit">Submit</button>
     <button class="btn" {{action cancel}}>Cancel</button>
   </div>
 </form>

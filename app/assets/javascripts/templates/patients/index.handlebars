@@ -1,24 +1,32 @@
-<h2>Patient List</h2>
-{{#link-to "patients.new"}}Add Patient{{/link-to}}
-<table class="table table-bordered">
+<div class="row">
+  <div class="col-md-8">
+    <h2>Patient List</h2>
+  </div>
+  <div class="col-md-4" style="padding-top: 20px">
+    {{#link-to "patients.new" class="btn btn-success pull-right"}}Add Patient{{/link-to}}
+  </div>
+</div>
+<table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Bed Number</th>
       <th>Patient Name</th>
+      <th>Temperature</th>
       <th>Blood Pressure</th>
       <th>Heart Rate</th>
       <th>Respitory Rate</th>
     </tr>
   </thead>
   <tbody>
-    {{#each controller}}
-      <tr>
+    {{#each patient in controller}}
+      {{#link-to 'patient' patient tagName="tr"}}
+        <td>{{patient.bedNumber}}</td>
+        <td>{{#link-to 'patient' patient}}{{patient.lastName}}, {{patient.firstName}}{{/link-to}}</td>
         <td></td>
-        <td>{{lastName}}, {{first_name}}</td>
         <td></td>
         <td></td>
         <td></td>
-      </tr>
+      {{/link-to}}
     {{/each}}
   </tbody>
 </table>
