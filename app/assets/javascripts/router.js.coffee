@@ -17,3 +17,5 @@ Acme.PatientsIndexRoute = Ember.Route.extend
 Acme.PatientsNewRoute = Ember.Route.extend
   model: -> Acme.Patient.createRecord()
 
+# Acme.PatientRoute = Ember.Route.extend
+#   model: -> Acme.Patient.find(patient_id)

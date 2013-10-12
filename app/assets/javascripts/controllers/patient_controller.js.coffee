@@ -1,4 +1,6 @@
 Acme.PatientController = Ember.ObjectController.extend(
-  toggleView: ->
-    @set "graphView", true
+
+  actions:
+    toggleView: ->
+      @set "graphView", true
 )
