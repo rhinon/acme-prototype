@@ -1,6 +1,5 @@
 <h2>Patient List</h2>
-<button {{action newPatient}}>Draw Winner</button>
-{{view Ember.TextField valueBinding="newPatientName" action="addPatient"}}
+{{#link-to "patients.new"}}Add Patient{{/link-to}}
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -12,10 +11,10 @@
     </tr>
   </thead>
   <tbody>
-    {{#each patients}}
+    {{#each controller}}
       <tr>
         <td></td>
-        <td>{{name}}</td>
+        <td>{{lastName}}, {{first_name}}</td>
         <td></td>
         <td></td>
         <td></td>
