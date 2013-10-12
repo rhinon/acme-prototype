@@ -45,3 +45,7 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'ember-rails'
+
+# dammit, rails 4 and active_model_serializers 0.8.1 are broken together.  pull from master...
+# https://github.com/rails-api/active_model_serializers/issues/346
+gem 'active_model_serializers', :git => 'git://github.com/rails-api/active_model_serializers.git'
