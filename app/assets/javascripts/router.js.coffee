@@ -16,11 +16,11 @@ Acme.PatientsIndexRoute = Ember.Route.extend
   model: -> Acme.Patient.find()
 
 Acme.PatientsNewRoute = Ember.Route.extend
-  model: -> Acme.Patient.createRecord()
+  model: -> Acme.Patient.create()
 
-# Acme.PatientRoute = Ember.Route.extend
-#   model: (params,model) -> 
-#     $.getJSON('')
+Acme.PatientRoute = Ember.Route.extend
+  model: (params,model) -> 
+    Acme.Patient.find(params.patient_id)
 
 Acme.VitalsNewRoute = Ember.Route.extend
   model: (params,model) -> 

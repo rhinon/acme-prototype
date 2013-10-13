@@ -12,15 +12,15 @@
     </tr>
   </thead>
   <tbody>
-    {{#each patient in controller}}
+    {{#each patient in model}}
       {{#link-to 'patient' patient tagName="tr"}}
-        <td>{{patient.bedNumber}}</td>
-        <td>{{#link-to 'patient' patient}}{{patient.lastName}}, {{patient.firstName}}{{/link-to}}</td>
+        <td>{{patient.bed_number}}</td>
+        <td>{{#link-to 'patient' patient}}{{patient.last_name}}, {{patient.first_name}}{{/link-to}}</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-        <td>{{#link-to 'vitals.new' patient}}+{{/link-to}}</td>
+        <td>{{#link-to 'vitals.new' patient class="btn btn-success"}}+{{/link-to}}</td>
       {{/link-to}}
     {{/each}}
   </tbody>

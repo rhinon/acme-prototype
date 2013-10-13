@@ -28,4 +28,10 @@ Acme::Application.configure do
   config.assets.debug = true
 
   config.ember.variant = :development
+
+  # Add the fonts path
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+  # Precompile additional assets
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
 end

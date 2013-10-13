@@ -1,12 +1,12 @@
 Acme.PatientsNewController = Ember.ObjectController.extend(
 
   actions:
-    save: ->
-      @get('store').commit()
+    save: (patientForm) ->
+      #newPatient = App.Person.create({first_name: @get 'first_name'});
+      #newPatient.save();
+      @get('model').save()
 
     cancel: ->
-      @get('content').deleteRecord()
-      @get('store').transaction().rollback()
       @transitionToRoute('patients')
   
   transitionAfterSave: ( ->

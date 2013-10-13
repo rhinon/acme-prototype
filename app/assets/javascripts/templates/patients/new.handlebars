@@ -1,27 +1,33 @@
 <h2>New Patient</h2>
-<form {{action save on="submit"}} class="form-horizontal">
+<form class="form-horizontal">
   <div class="form-group">
-    <label class="col-md-2 control-label" for="firstName">First Name</label>
+    <label class="col-md-2 control-label" for="first_name">First Name</label>
     <div class="col-md-3">
-      {{input valueBinding="firstName" id="firstName" placeholder="First Name" required="true" class="form-control"}}
+      {{input valueBinding="first_name" id="first_name" placeholder="First Name" required="true" class="form-control"}}
     </div>
   </div>
   <div class="form-group">
-    <label class="col-md-2 control-label" for="lastName">Last Name</label>
+    <label class="col-md-2 control-label" for="last_name">Last Name</label>
     <div class="col-md-3">
-      {{input valueBinding="lastName" id="lastName" placeholder="Last Name" required="true" class="form-control"}}
+      {{input valueBinding="last_name" id="last_name" placeholder="Last Name" required="true" class="form-control"}}
     </div>
   </div>
   <div class="form-group">
-    <label class="col-md-2 control-label" for="bedNumber">Bed Number</label>
+    <label class="col-md-2 control-label" for="bed_number">Bed Number</label>
     <div class="col-md-3">
-      {{input valueBinding="bedNumber" id="bedNumber" required="false" class="form-control"}}
+      {{input valueBinding="bed_number" id="bed_number" required="false" class="form-control"}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="mrn">MRN</label>
+    <div class="col-md-3">
+      {{input valueBinding="mrn" id="mrn" required="false" class="form-control"}}
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn btn-primary" {{action save this}}>Submit</button>
       <button class="btn" {{action cancel}}>Cancel</button>
     </div>
   </div>

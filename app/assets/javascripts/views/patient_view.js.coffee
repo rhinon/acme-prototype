@@ -11,7 +11,7 @@ Acme.PatientView = Ember.View.extend
     @updateCharts()
 
   refreshChart: ->
-    @bpChart.bleh
+    
 
   # vitalsObserver: ( ->
   #   console.log 'vitals observed'

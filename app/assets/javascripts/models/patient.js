@@ -1,6 +1,11 @@
-Acme.Patient = DS.Model.extend({
-  firstName: DS.attr('string'),
-  lastName: DS.attr('string'),
-  bedNumber: DS.attr('number'),
-  vitals: DS.hasMany('Acme.Vital'),
+Acme.Patient = Ember.Model.extend({
+  first_name: Ember.attr(),
+  last_name: Ember.attr(),
+  bed_number: Ember.attr(),
+  vitals: Ember.hasMany('Acme.Vital', {key: 'vital_ids'})
 });
+
+Acme.Patient.adapter = Ember.RESTAdapter.create();
+Acme.Patient.url = "patients";
+Acme.Patient.rootKey = "patient"
+Acme.Patient.collectionKey = "patients";

@@ -1,4 +1,4 @@
-<h2>{{lastName}}, {{firstName}}  <button class="btn btn-primary pull-right" {{action toggleView}}>{{toggleText}}</button></h2>
+<h2>{{model.last_name}}, {{model.first_name}}  <button class="btn btn-primary pull-right" {{action toggleView}}>{{toggleText}}</button></h2>
 {{outlet}}
 {{#if graphView}}
   <h4>Body Temperature</h4>
@@ -30,13 +30,13 @@
       </tr>
     </thead>
     <tbody>
-      {{#each vital in vitals}}
+      {{#each vital in model.vitals}}
         <tr>
-          <td>{{vital.bodyTemp}} &#176;F</td>
-          <td>{{vital.bloodPressureSystolic}}/{{vital.bloodPressureDiastolic}}</td>
-          <td>{{vital.heartRateBpm}}</td>
-          <td>{{vital.respiratoryRateBpm}}</td>
-          <td>{{vital.createdAt}}</td>
+          <td>{{vital.body_temp}} &#176;F</td>
+          <td>{{vital.blood_pressure_systolic}}/{{vital.blood_pressure_diastolic}}</td>
+          <td>{{vital.heart_rate_bpm}}</td>
+          <td>{{vital.respiratory_rate_bpm}}</td>
+          <td>{{vital.created_at}}</td>
         </tr>
       {{/each}}
     </tbody>
