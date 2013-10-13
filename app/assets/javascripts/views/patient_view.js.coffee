@@ -2,23 +2,47 @@
 
 Acme.PatientView = Ember.View.extend
   templateName: 'patient'
+  chartsLoaded: false
+  bpChart: null
 
   didInsertElement: ->
     console.log 'didInsertElement'
+    @get('controller').on('switchedToGraphView', $.proxy(@refreshChart, this));
     @updateCharts()
+
+  refreshChart: ->
+    @bpChart.bleh
+
+  # vitalsObserver: ( ->
+  #   console.log 'vitals observed'
+
+  #   vitals = @get('controller.model.vitals')
+  #   console.log vitals
+
+  #   #return if !this.$() # View not in DOM
+
+
+  #   if !this.$()
+  #     vitals.addObserver('updateCharts')
+  #     return
+
+  #   Ember.run.scheduleOnce('afterRender', this, 'updateCharts');
+  # ).observes('controller.model.vitals.isLoaded')
 
   vitalsObserver: ( ->
     console.log 'vitals observed'
 
-    vitals = @get('controller.model.vitals')
-    console.log vitals
-
     return if !this.$() # View not in DOM
-    Ember.run.once(this, 'updateCharts');
-  ).observes('controller.model.vitals')
+    @updateCharts()
+  ).observes('controller.model.vitals.isLoaded')
 
   updateCharts: ->
     console.log 'Charts updating!'
+    # if @chartsLoaded
+    #   console.log 'ignoring duplicate'
+    #   return
+
+    # @set 'chartsLoaded', true
     #console.log @get 'controller.model.vitals'
 
     bpSys = []
@@ -27,7 +51,12 @@ Acme.PatientView = Ember.View.extend
     rrs = []
     hrs = []
     dates = []
-    vitals = @get('controller.model').get('vitals')
+    vitals = @get('controller.model.vitals')
+
+    if !vitals.isLoaded
+      console.log 'vitals not loaded'
+      return
+
     #console.log vitals
     for vital in vitals.toArray()
       bpSys.push vital.get('bloodPressureSystolic')
@@ -88,33 +117,18 @@ Acme.PatientView = Ember.View.extend
     @populateChart("#rrChart", rrData)
     @populateChart("#hrChart", hrData)
 
-    # bpChart = new Chart($("#bpChart").get(0).getContext("2d")).Line(bpData, {
-    #   datasetFill: false
-    # })
+    bpChart = new Chart($("#bpChart").get(0).getContext("2d")).Line(bpData, {
+      datasetFill: false
+    })
 
-    # bodyTempChart = new Chart($("#bodyTempChart").get(0).getContext("2d")).Line(bodyTempData, {
-    #   datasetFill: false
-    # })
+    bodyTempChart = new Chart($("#bodyTempChart").get(0).getContext("2d")).Line(bodyTempData, {
+      datasetFill: false
+    })
 
-    # rrChart = new Chart($("#rrChart").get(0).getContext("2d")).Line(rrData, {
-    #   datasetFill: false
-    # })
+    rrChart = new Chart($("#rrChart").get(0).getContext("2d")).Line(rrData, {
+      datasetFill: false
+    })
 
-    # hrChart = new Chart($("#hrChart").get(0).getContext("2d")).Line(hrData, {
-    #   datasetFill: false
-    # })
-
-  populateChart: (id,data) ->
-    canvas = $(id).get(0)
-    return if !canvas
-
-    # chartDataset = 
-    #   labels: dates
-    #   datasets: [{
-    #     strokeColor: color
-    #     pointColor: color
-    #     pointStrokeColor: "#fff"
-    #     data: data
-    #     }]
-
-    new Chart(canvas.getContext("2d")).Line(data, { datasetFill: false })
+    hrChart = new Chart($("#hrChart").get(0).getContext("2d")).Line(hrData, {
+      datasetFill: false
+    })
