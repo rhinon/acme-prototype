@@ -4,7 +4,8 @@
     <tr>
       <th>Bed Number</th>
       <th>Patient Name</th>
-      <th>Temperature</th>
+      <th>MRN</th>
+      <th>Body Temp</th>
       <th>Blood Pressure</th>
       <th>Heart Rate</th>
       <th>Respitory Rate</th>
@@ -16,6 +17,7 @@
       {{#link-to 'patient' patient tagName="tr"}}
         <td>{{patient.bed_number}}</td>
         <td>{{#link-to 'patient' patient}}{{patient.last_name}}, {{patient.first_name}}{{/link-to}}</td>
+        <td>{{patient.mrn}}</td>
         <td></td>
         <td></td>
         <td></td>
