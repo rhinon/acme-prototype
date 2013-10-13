@@ -12,7 +12,7 @@ Acme.VitalsNewController = Ember.ObjectController.extend(
     cancel: ->
       @get('content').deleteRecord()
       @get('store').transaction().rollback()
-      @transitionToRoute('patients')
+      @transitionToRoute('patient', @get('content').patient)
   
   transitionAfterSave: ( ->
     # when creating new records, it's necessary to wait for the record to be assigned

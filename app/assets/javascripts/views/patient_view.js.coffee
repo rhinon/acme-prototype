@@ -4,9 +4,21 @@ Acme.PatientView = Ember.View.extend
   templateName: 'patient'
 
   didInsertElement: ->
+    console.log 'didInsertElement'
     @updateCharts()
 
+  vitalsObserver: ( ->
+    console.log 'vitals observed'
+
+    vitals = @get('controller.model.vitals')
+    console.log vitals
+
+    return if !this.$() # View not in DOM
+    Ember.run.once(this, 'updateCharts');
+  ).observes('controller.model.vitals')
+
   updateCharts: ->
+    console.log 'Charts updating!'
     #console.log @get 'controller.model.vitals'
 
     bpSys = []
@@ -23,11 +35,7 @@ Acme.PatientView = Ember.View.extend
       bodyTemps.push vital.get('bodyTemp')
       hrs.push vital.get('heartRateBpm')
       rrs.push vital.get('respiratoryRateBpm')
-      dates.push(moment(vital.get('createdAt')).zone("-05:00").format('D/M h:mm a'))
-
-    console.log hrs
-    console.log rrs
-    console.log dates
+      dates.push(moment(vital.get('createdAt')).zone("-05:00").format('M/D h:mm a'))
 
     bpData =
       labels: dates
@@ -75,18 +83,38 @@ Acme.PatientView = Ember.View.extend
         data : hrs
         }]
 
-    bpChart = new Chart($("#bpChart").get(0).getContext("2d")).Line(bpData, {
-      datasetFill: false
-    });
+    @populateChart("#bpChart", bpData)
+    @populateChart("#bodyTempChart", bodyTempData)
+    @populateChart("#rrChart", rrData)
+    @populateChart("#hrChart", hrData)
 
-    bodyTempChart = new Chart($("#bodyTempChart").get(0).getContext("2d")).Line(bodyTempData, {
-      datasetFill: false
-    });
+    # bpChart = new Chart($("#bpChart").get(0).getContext("2d")).Line(bpData, {
+    #   datasetFill: false
+    # })
 
-    rrChart = new Chart($("#rrChart").get(0).getContext("2d")).Line(rrData, {
-      datasetFill: false
-    });
+    # bodyTempChart = new Chart($("#bodyTempChart").get(0).getContext("2d")).Line(bodyTempData, {
+    #   datasetFill: false
+    # })
 
-    hrChart = new Chart($("#hrChart").get(0).getContext("2d")).Line(hrData, {
-      datasetFill: false
-    });
+    # rrChart = new Chart($("#rrChart").get(0).getContext("2d")).Line(rrData, {
+    #   datasetFill: false
+    # })
+
+    # hrChart = new Chart($("#hrChart").get(0).getContext("2d")).Line(hrData, {
+    #   datasetFill: false
+    # })
+
+  populateChart: (id,data) ->
+    canvas = $(id).get(0)
+    return if !canvas
+
+    # chartDataset = 
+    #   labels: dates
+    #   datasets: [{
+    #     strokeColor: color
+    #     pointColor: color
+    #     pointStrokeColor: "#fff"
+    #     data: data
+    #     }]
+
+    new Chart(canvas.getContext("2d")).Line(data, { datasetFill: false })
