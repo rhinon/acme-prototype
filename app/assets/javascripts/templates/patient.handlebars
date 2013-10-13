@@ -1,7 +1,22 @@
 <h2>{{lastName}}, {{firstName}}  <button class="btn btn-primary pull-right" {{action toggleView}}>{{toggleText}}</button></h2>
-
+{{outlet}}
 {{#if graphView}}
-  <h4>Graphs go here</h4>
+  <h4>Body Temperature</h4>
+  <div class="col-md-12">
+    <canvas id="bodyTempChart" width="800px" height="300px"></canvas>
+  </div>
+  <h4>Blood Pressure</h4>
+  <div class="col-md-12">
+    <canvas id="bpChart" width="800px" height="300px"></canvas>
+  </div>
+  <h4>Heart Rate</h4>
+  <div class="col-md-12">
+    <canvas id="hrChart" width="800px" height="300px"></canvas>
+  </div>
+  <h4>Respiratory Rate</h4>
+  <div class="col-md-12">
+    <canvas id="rrChart" width="800px" height="300px"></canvas>
+  </div>
 {{else}}
   <h4>Dataset</h4>
   <table class="table table-bordered table-striped">
@@ -11,17 +26,20 @@
         <th>Blood Pressure</th>
         <th>Heart Rate</th>
         <th>Respitory Rate</th>
+        <th>Recorded</th>
       </tr>
     </thead>
     <tbody>
       {{#each vital in vitals}}
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{vital.bodyTemp}} &#176;F</td>
+          <td>{{vital.bloodPressureSystolic}}/{{vital.bloodPressureDiastolic}}</td>
+          <td>{{vital.heartRateBpm}}</td>
+          <td>{{vital.respiratoryRateBpm}}</td>
+          <td>{{vital.createdAt}}</td>
         </tr>
       {{/each}}
     </tbody>
   </table>
 {{/if}}
+

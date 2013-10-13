@@ -1,0 +1,37 @@
+<h2>Add Vitals</h2>
+<form {{action save on="submit"}} class="form-horizontal">
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="bloodPressureSystolic">Blood Pressure</label>
+    <div class="col-md-2">
+      {{input valueBinding="bloodPressureSystolic" id="bloodPressureSystolic" placeholder="Systolic" required="true" class="form-control"}}
+    </div>
+    <div class="col-md-2">
+      {{input valueBinding="bloodPressureDiastolic" id="bloodPressureDiastolic" placeholder="Diastolic" required="true" class="form-control"}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="bodyTemp">Body Temp</label>
+    <div class="col-md-3">
+      {{input valueBinding="bodyTemp" id="bodyTemp" placeholder="In Farenheit" required="true" class="form-control"}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="respiratoryRateBpm">Respiratory Rate</label>
+    <div class="col-md-3">
+      {{input valueBinding="respiratoryRateBpm" id="respiratoryRateBpm" placeholder="breaths per minute" required="true" class="form-control"}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="heartRateBpm">Heart Rate</label>
+    <div class="col-md-3">
+      {{input valueBinding="heartRateBpm" id="heartRateBpm" placeholder="beats per minute" required="true" class="form-control"}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn" {{action cancel}}>Cancel</button>
+    </div>
+  </div>
+</form>

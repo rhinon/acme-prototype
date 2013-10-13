@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require moment
+//= require Chart
 //= require handlebars
 //= require ember
 //= require ember-data

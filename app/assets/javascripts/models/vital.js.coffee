@@ -7,3 +7,5 @@ Acme.Vital = DS.Model.extend
   bodyTemp: DS.attr 'number'
   respiratoryRateBpm: DS.attr 'number'
   heartRateBpm: DS.attr 'number'
+  createdAt: DS.attr 'date'
+

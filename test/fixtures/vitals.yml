@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  patient_id_id: 
+  patient_id: 
   blood_pressure_systolic: 1
   blood_pressure_diastolic: 1
   body_temp: 9.99
@@ -9,7 +9,7 @@ one:
   heart_rate_bpm: 1
 
 two:
-  patient_id_id: 
+  patient_id: 
   blood_pressure_systolic: 1
   blood_pressure_diastolic: 1
   body_temp: 9.99
