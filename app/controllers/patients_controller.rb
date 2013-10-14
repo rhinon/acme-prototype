@@ -6,7 +6,7 @@ class PatientsController < ApplicationController
   end
 
   def show
-    respond_with Patient.find(params[:id])
+    respond_with Patient.find(params[:id]), serializer: FullPatientSerializer
   end
 
   def create

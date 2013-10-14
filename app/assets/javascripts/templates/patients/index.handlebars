@@ -18,10 +18,10 @@
         <td>{{patient.bed_number}}</td>
         <td>{{#link-to 'patient' patient}}{{patient.last_name}}, {{patient.first_name}}{{/link-to}}</td>
         <td>{{patient.mrn}}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{patient.last_vital.body_temp}}</td>
+        <td>{{#if patient.last_vital}}{{patient.last_vital.blood_pressure_systolic}}/{{patient.last_vital.blood_pressure_diastolic}}{{/if}}</td>
+        <td>{{patient.last_vital.heart_rate_bpm}}</td>
+        <td>{{patient.last_vital.respiratory_rate_bpm}}</td>
         <td>{{#link-to 'vitals.new' patient class="btn btn-success"}}+{{/link-to}}</td>
       {{/link-to}}
     {{/each}}

@@ -1,21 +1,21 @@
 <h2>{{model.last_name}}, {{model.first_name}} <small>{{model.mrn}}</small> <button class="btn btn-primary pull-right" {{action toggleView}}>{{toggleText}}</button></h2>
 {{outlet}}
 {{#if graphView}}
-  <h4>Body Temperature</h4>
+  <h4>Body Temperature <small>&#176;F</small></h4>
   <div class="col-md-12">
-    <canvas id="bodyTempChart" width="800px" height="300px"></canvas>
+    {{view Acme.ChartView id="bodyTempChart" chartDataBinding="all_body_temps"}}
   </div>
   <h4>Blood Pressure</h4>
   <div class="col-md-12">
-    <canvas id="bpChart" width="800px" height="300px"></canvas>
+    {{view Acme.ChartView id="bpChart" chartDataBinding="all_bp"}}
   </div>
-  <h4>Heart Rate</h4>
+  <h4>Heart Rate <small>beats per minute</small></h4>
   <div class="col-md-12">
-    <canvas id="hrChart" width="800px" height="300px"></canvas>
+    {{view Acme.ChartView id="hrChart" chartDataBinding="all_heart_rates"}}
   </div>
-  <h4>Respiratory Rate</h4>
+  <h4>Respiratory Rate <small>breathes per minute</small></h4>
   <div class="col-md-12">
-    <canvas id="rrChart" width="800px" height="300px"></canvas>
+    {{view Acme.ChartView id="rrChart" chartDataBinding="all_resp_rates"}}
   </div>
 {{else}}
   <h4>Dataset</h4>

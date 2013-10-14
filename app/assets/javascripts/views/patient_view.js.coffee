@@ -7,7 +7,7 @@ Acme.PatientView = Ember.View.extend
 
   didInsertElement: ->
     console.log 'didInsertElement'
-    @get('controller').on('switchedToGraphView', $.proxy(@refreshChart, this));
+    #@get('controller').on('switchedToGraphView', $.proxy(@updateCharts, this));
     @updateCharts()
 
   refreshChart: ->
@@ -34,7 +34,7 @@ Acme.PatientView = Ember.View.extend
 
     return if !this.$() # View not in DOM
     @updateCharts()
-  ).observes('controller.model.vitals.isLoaded')
+  ).observes('controller.model.vitals')
 
   updateCharts: ->
     console.log 'Charts updating!'
@@ -52,19 +52,24 @@ Acme.PatientView = Ember.View.extend
     hrs = []
     dates = []
     vitals = @get('controller.model.vitals')
+    console.log vitals
 
-    if !vitals.isLoaded
+    if vitals.toArray().length == 0
+      console.log vitals.toArray()
       console.log 'vitals not loaded'
       return
 
     #console.log vitals
     for vital in vitals.toArray()
-      bpSys.push vital.get('bloodPressureSystolic')
-      bpDia.push vital.get('bloodPressureDiastolic')
-      bodyTemps.push vital.get('bodyTemp')
-      hrs.push vital.get('heartRateBpm')
-      rrs.push vital.get('respiratoryRateBpm')
-      dates.push(moment(vital.get('createdAt')).zone("-05:00").format('M/D h:mm a'))
+      bpSys.push vital.get('blood_pressure_systolic')
+      bpDia.push vital.get('blood_pressure_diastolic')
+      bodyTemps.push vital.get('body_temp')
+      hrs.push vital.get('heart_rate_bpm')
+      rrs.push vital.get('respiratory_rate_bpm')
+      dates.push(moment(vital.get('created_at')).zone("-05:00").format('M/D h:mm a'))
+
+    console.log bpSys
+    console.log bpDia
 
     bpData =
       labels: dates
@@ -112,23 +117,26 @@ Acme.PatientView = Ember.View.extend
         data : hrs
         }]
 
-    @populateChart("#bpChart", bpData)
-    @populateChart("#bodyTempChart", bodyTempData)
-    @populateChart("#rrChart", rrData)
-    @populateChart("#hrChart", hrData)
+    return if !this.$() # View not in DOM
 
-    bpChart = new Chart($("#bpChart").get(0).getContext("2d")).Line(bpData, {
-      datasetFill: false
-    })
+    console.log 'charts created'
 
-    bodyTempChart = new Chart($("#bodyTempChart").get(0).getContext("2d")).Line(bodyTempData, {
-      datasetFill: false
-    })
+    test = $("#bpChart").get(0)
 
-    rrChart = new Chart($("#rrChart").get(0).getContext("2d")).Line(rrData, {
-      datasetFill: false
-    })
 
-    hrChart = new Chart($("#hrChart").get(0).getContext("2d")).Line(hrData, {
-      datasetFill: false
-    })
+
+    # bpChart = new Chart(test.getContext("2d")).Line(bpData, {
+    #   datasetFill: false
+    # })
+
+    # bodyTempChart = new Chart($("#bodyTempChart").get(0).getContext("2d")).Line(bodyTempData, {
+    #   datasetFill: false
+    # })
+
+    # rrChart = new Chart($("#rrChart").get(0).getContext("2d")).Line(rrData, {
+    #   datasetFill: false
+    # })
+
+    # hrChart = new Chart($("#hrChart").get(0).getContext("2d")).Line(hrData, {
+    #   datasetFill: false
+    # })

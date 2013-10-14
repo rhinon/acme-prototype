@@ -3,7 +3,12 @@ Acme.Patient = Ember.Model.extend({
   last_name: Ember.attr(),
   bed_number: Ember.attr(),
   mrn: Ember.attr(),
-  vitals: Ember.hasMany('Acme.Vital', {key: 'vital_ids'})
+  vitals: Ember.hasMany('Acme.Vital', {key: 'vitals', embedded: true}),
+
+  last_vital: function() {
+    var vitals = this.get('vitals.lastObject');
+    return vitals;
+  }.property('vitals')
 });
 
 Acme.Patient.adapter = Ember.RESTAdapter.create();
