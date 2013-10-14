@@ -2,6 +2,7 @@ Acme.VitalsNewController = Ember.ObjectController.extend(
   
   actions:
     save: ->
+      # TODO cleanup
       newVital = @get 'model'
       patient = @get('patient')
       self = this

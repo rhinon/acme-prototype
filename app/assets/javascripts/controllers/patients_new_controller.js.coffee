@@ -6,7 +6,6 @@ Acme.PatientsNewController = Ember.ObjectController.extend(
       model = @get('model')
 
       model.save().then =>
-        console.debug 'then route'
         @transitionToRoute('patients')
 
     cancel: ->
