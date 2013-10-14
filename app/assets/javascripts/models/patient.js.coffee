@@ -12,6 +12,10 @@ Acme.Patient = Ember.Model.extend
     return null
   ).property('vitals.@each')
 
+  full_lowercase_name: ( ->
+    return @get('first_name').toLowerCase() + " " + @get('last_name').toLowerCase()
+  ).property('first_name', 'last_name')
+
 Acme.Patient.adapter = Ember.RESTAdapter.create()
 Acme.Patient.url = "patients"
 Acme.Patient.rootKey = "patient"

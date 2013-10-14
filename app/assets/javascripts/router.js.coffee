@@ -17,6 +17,7 @@ Acme.PatientsIndexRoute = Ember.Route.extend
 
   setupController: (controller, model) ->
     model.reload()
+    controller.set 'filteredModels', model
     controller.set 'content', model
 
 Acme.PatientsNewRoute = Ember.Route.extend
