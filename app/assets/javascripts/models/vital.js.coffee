@@ -10,6 +10,14 @@ Acme.Vital = Ember.Model.extend
   created_at: Ember.attr()
 
 Acme.Vital.adapter = Ember.RESTAdapter.create()
+#   createRecord: (record) ->
+#     patientId = record.get('patient').get('id')
+
+#     @ajax('patients/'+ patientId + '/vitals.json', record.toJSON(), "POST").then( (data) ->
+#       @didCreateRecord(record, data)
+#       return record
+#     )
+# )
 Acme.Vital.url = "vitals"
 Acme.Vital.rootKey = 'vital'
 Acme.Vital.collectionKey = "vitals"

@@ -24,10 +24,9 @@ Acme.PatientRoute = Ember.Route.extend
 
 Acme.VitalsNewRoute = Ember.Route.extend
   model: (params,model) -> 
-    #what = Acme.Patient.find(params.patient_id)
-    #what = @get('store').findQuery('patients', {id: params.patient_id})
-    vital = Acme.Vital.createRecord()
-    #vital.set('patient', what)
+    Acme.Vital.create({patient: @modelFor('patient')})
 
-# Acme.PatientRoute = Ember.Route.extend
-#   model: -> Acme.Patient.find(patient_id)
+  setupController: (controller, model) ->
+    patient = @modelFor('patient')
+    controller.set('patient_id', patient.id)
+    controller.set 'content', model

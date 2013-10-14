@@ -1,17 +1,29 @@
 Acme.VitalsNewController = Ember.ObjectController.extend(
+  patient_id: 0
 
   actions:
     save: ->
-      console.info 'hi'
-      console.info(@get('vitals'))
+      newVital = @get 'model'
+      # patient = Acme.Patient.find(1)
+      # newVital.set 'patient', patient
+      # patient.get('vitals').push newVital
+      # patient.save()
+      #newVital.save()
 
-      #patient = App.Patient.find(@get('patient_id'));
-      #patient.get("vitals").pushObject(App.Item.find(1));
-      @get('store').commit()
+      patient = @get('patient')
+      vitals = patient.get('vitals')
+
+      #newVital.set('patient_id', 4)
+      console.log patient
+      console.log vitals
+
+      newVital.save()
+      patient.reload()
+      #newVital.get('patient').get('vitals.lastObject').save()
+      # TODO check save return? sync/async? validation, etc...
+      @transitionToRoute('patient', @get('content').patient)
 
     cancel: ->
-      @get('content').deleteRecord()
-      @get('store').transaction().rollback()
       @transitionToRoute('patient', @get('content').patient)
   
   transitionAfterSave: ( ->
