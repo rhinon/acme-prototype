@@ -4,7 +4,8 @@ Acme.VitalsNewController = Ember.ObjectController.extend(
     save: ->
       newVital = @get 'model'
       patient = @get('patient')
-      newVital.save()
+      test = newVital.save()
+      console.log test
       patient.reload()
       @transitionToRoute('patient', @get('content').patient)
 

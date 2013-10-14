@@ -7,8 +7,8 @@ Acme.PatientController = Ember.ObjectController.extend(Ember.Evented,
   all_resp_rates: []
   all_bp: []
 
-  # Observes when the patient loads and populates the data
-  patient_observer: ( ->
+  # Observes when the patient loads and populates the graph data
+  populateGraphVitalsData: ( ->
     console.log 'observed patient!'
     console.log vitals = @get('model.vitals').toArray()
 
@@ -31,12 +31,17 @@ Acme.PatientController = Ember.ObjectController.extend(Ember.Evented,
 
     for vital in vitals
       vital_dates.push(moment(vital.get('created_at')).zone("-05:00").format('M/D h:mm a'))
-      all_body_temps.push(parseFloat(vital.get('body_temp')))
+      all_body_temps.push(vital.get('body_temp'))
       all_heart_rates.push vital.get('heart_rate_bpm')
       all_resp_rates.push vital.get('respiratory_rate_bpm')
       all_bp_sys.push vital.get('blood_pressure_systolic')
       all_bp_dia.push vital.get('blood_pressure_diastolic')
-      
+    
+    # Vitals are sorted descending, for the graph we need to flip
+    # Push+Reverse appears to be more performant than unshift:
+    # http://jsperf.com/array-push-vs-unshift
+    vital_dates = vital_dates.reverse()
+
     @set 'all_body_temps', { 
       labels: vital_dates
       datasets: [@_generateDataSet(all_body_temps,"87,205,105")]}
@@ -53,6 +58,7 @@ Acme.PatientController = Ember.ObjectController.extend(Ember.Evented,
   ).observes('model.isLoaded')
 
   _generateDataSet: (data,color) ->
+    data = data.reverse()
     return {
       fillColor : "rgba(" + color + ",0.5)"
       strokeColor : "rgba(" + color + ",1)"
