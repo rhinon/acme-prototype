@@ -4,8 +4,6 @@ Acme.ChartView = Ember.View.extend
   attributeBindings: ['width','height','class']
   width: '800px'
   height: '300px'
-  # attributeBindings: ['class']
-  # class: 'col-md-8'
   class: ''
   chart: null
 
@@ -31,7 +29,3 @@ Acme.ChartView = Ember.View.extend
     chart = new Chart(@get('element').getContext("2d")).Line(data, {
       datasetFill: false
     })
-
-    # @set 'class', 'col-md-12'
-    # @set 'width', ''
-    # @set 'height', ''
