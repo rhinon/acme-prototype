@@ -1,10 +1,11 @@
 <h2>Patient List{{#link-to "patients.new" class="btn btn-success pull-right"}}Add Patient{{/link-to}}</h2>
+<div class="table-responsive">
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Bed Number</th>
-      <th>Patient Name</th>
-      <th>MRN</th>
+      <th>Patient</th>
+      <th>Last Updated</th>
       <th>Body Temp</th>
       <th>Blood Pressure</th>
       <th>Heart Rate</th>
@@ -16,8 +17,8 @@
     {{#each patient in model}}
       {{#link-to 'patient' patient tagName="tr"}}
         <td>{{patient.bed_number}}</td>
-        <td>{{#link-to 'patient' patient}}{{patient.last_name}}, {{patient.first_name}}{{/link-to}}<br /><small>{{patient.last_vital.pretty_created_at}}</small></td>
-        <td>{{patient.mrn}}</td>
+        <td>{{#link-to 'patient' patient}}{{patient.last_name}}, {{patient.first_name}}{{/link-to}}<br /><small>{{patient.mrn}}</small></td>
+        <td>{{patient.last_vital.pretty_created_at}}</td>
         <td>{{patient.last_vital.body_temp}}</td>
         <td>{{#if patient.last_vital}}{{patient.last_vital.blood_pressure_systolic}}/{{patient.last_vital.blood_pressure_diastolic}}{{/if}}</td>
         <td>{{patient.last_vital.heart_rate_bpm}}</td>
@@ -27,3 +28,4 @@
     {{/each}}
   </tbody>
 </table>
+</div>

@@ -1,9 +1,12 @@
 Acme.ChartView = Ember.View.extend
   templateName: 'chart'
   tagName: 'canvas'
-  attributeBindings: ['width','height']
+  attributeBindings: ['width','height','class']
   width: '800px'
   height: '300px'
+  # attributeBindings: ['class']
+  # class: 'col-md-8'
+  class: ''
   chart: null
 
   didInsertElement: (->
@@ -11,39 +14,24 @@ Acme.ChartView = Ember.View.extend
   )
 
   observe_load_and_rerender: ( ->
-    @rerender()
+    @loadChart()
   ).observes('model.isLoaded')
 
   loadChart: ->
-    # dates = @get 'dates'
     data = @get 'chartData'
-    # #data2 = @get 'chartData2'
-    # color = @get 'color'
-
-    console.log data
 
     if data['labels'].length == 0
+      @set 'width', '0px'
+      @set 'height', '0px'
       return
+    else
+      @set 'width', '800px'
+      @set 'height', '300px'
 
-    # datasets = []
-    # index = 0
-    # for data in chartData
-    #   datasets.push {
-    #       fillColor : "rgba(" + color[index] + ",0.5)"
-    #       strokeColor : "rgba(" + color[index] + ",1)"
-    #       pointColor : "rgba(" + color[index] + ",1)"
-    #       pointStrokeColor : "#fff"
-    #       data : data
-    #     }
-    #   index += 1
-
-    # chartData =
-    #   labels: dates
-    #   datasets: datasets
-
-    # if !chart
     chart = new Chart(@get('element').getContext("2d")).Line(data, {
       datasetFill: false
     })
-    # else
-    #   chart.
+
+    # @set 'class', 'col-md-12'
+    # @set 'width', ''
+    # @set 'height', ''
