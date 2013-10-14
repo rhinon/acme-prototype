@@ -9,9 +9,6 @@ Acme.PatientController = Ember.ObjectController.extend(Ember.Evented,
 
   # Observes when the patient loads and populates the graph data
   populateGraphVitalsData: ( ->
-    console.log 'observed patient!'
-    console.log vitals = @get('model.vitals').toArray()
-
     vitals = @get('model.vitals').toArray()
     if vitals is undefined
       return []

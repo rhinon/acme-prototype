@@ -4,18 +4,16 @@ Acme.VitalsNewController = Ember.ObjectController.extend(
     save: ->
       newVital = @get 'model'
       patient = @get('patient')
-      test = newVital.save()
-      console.log test
+      self = this
+      # BUGBUG since didCreateRecord doesn't get called on fail,
+      # every failure will result in this fn getting called +1 times.
+      # Not sure if ember-model supports error handling right now.
+      newVital.one('didCreateRecord', -> 
+        patient.reload()
+        self.transitionToRoute('patients'))
+      newVital.save()
       patient.reload()
-      @transitionToRoute('patient', @get('content').patient)
 
     cancel: ->
       @transitionToRoute('patient', @get('content').patient)
-  
-  transitionAfterSave: ( ->
-    # when creating new records, it's necessary to wait for the record to be assigned
-    # an id before we can transition to its route (which depends on its id)
-    @transitionToRoute('patient', @get('content').patient) if @get('content.id')
-  ).observes('content.id')
-  
 )

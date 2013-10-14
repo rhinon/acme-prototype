@@ -16,7 +16,7 @@
     {{#each patient in model}}
       {{#link-to 'patient' patient tagName="tr"}}
         <td>{{patient.bed_number}}</td>
-        <td>{{#link-to 'patient' patient}}{{patient.last_name}}, {{patient.first_name}}{{/link-to}}</td>
+        <td>{{#link-to 'patient' patient}}{{patient.last_name}}, {{patient.first_name}}{{/link-to}}<br /><small>{{patient.last_vital.pretty_created_at}}</small></td>
         <td>{{patient.mrn}}</td>
         <td>{{patient.last_vital.body_temp}}</td>
         <td>{{#if patient.last_vital}}{{patient.last_vital.blood_pressure_systolic}}/{{patient.last_vital.blood_pressure_diastolic}}{{/if}}</td>
